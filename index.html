@@ -1,130 +1,57 @@
+<!DOCTYPE html>
 <html>
 <head>
-<style>
-	.form-group {
-    margin-bottom: 15px;
-}
-	label {
-    display: inline-block;
-    max-width: 100%;
-    margin-bottom: 5px;
-    font-weight: 700;
-}
-	.form-control::placeholder {
-    color: #999;
-    opacity: 1;
-}
-	
-	.form-control::placeholder {
-    color: #999;
-    opacity: 1;
-}
-	.btn-default {
-    color: #333;
-    background-color: #fff;
-    border-color: #ccc;
-}
-.btn {
-    display: inline-block;
-    padding: 6px 12px;
-    margin-bottom: 0;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 1.42857143;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    -ms-touch-action: manipulation;
-    touch-action: manipulation;
-    cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    background-image: none;
-    border: 1px solid transparent;
-        border-top-color: transparent;
-        border-right-color: transparent;
-        border-bottom-color: transparent;
-        border-left-color: transparent;
-    border-radius: 4px;
-}
-.form-control {
-    display: block;
-    width: 100%;
-    height: 34px;
-    padding: 6px 12px;
-    font-size: 14px;
-    line-height: 1.42857143;
-    color: #555;
-    background-color: #fff;
-    background-image: none;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
-    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-}
-	.text-success {
-    color: #3c763d;
-}
-	
-::after, ::before {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-}
-eleman {
-}
-.col-sm-6 {
-    width: 30%;
-}
-.col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9 {
-    float: left;
-}
-.col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
-    position: relative;
-    min-height: 1px;
-    padding-right: 15px;
-    padding-left: 15px;
-}
-* {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-}
-body {
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-size: 14px;
-    line-height: 1.42857143;
-    color: #333;
-}
-html {
-    font-size: 10px;
-}
-html {
-    font-family: sans-serif;
-    -webkit-text-size-adjust: 100%;
-}	
-</style>
-</head>
-<body>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Simple File Transfer</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400">  <!-- Google web font "Open Sans" -->
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  
+  <link rel="stylesheet" href="css/demo.css" />
+  <link rel="stylesheet" href="css/templatemo-style.css">
+  
+  <script type="text/javascript" src="js/modernizr.custom.86080.js"></script>
+		
+	</head>
+
+	<body>
+
+			<div id="particles-js"></div>
+		
+			<ul class="cb-slideshow">
+	            <li></li>
+	            <li></li>
+	            <li></li>
+	            <li></li>
+	            <li></li>
+	            <li></li>
+	        </ul>
+
+			<div class="container-fluid">
+				<div class="row cb-slideshow-text-container ">
+					<div class= "tm-content col-xl-6 col-sm-8 col-xs-8 ml-auto section">
+					<header class="mb-5"><h1>File Transfer</h1></header>
+					<P class="mb-5"></P>
+					
+                    <form action="#" method="get" class="subscribe-form">
+               	    	<div class="row form-section">
 	<form id="sendForm" class="col-sm-6">
 		<div class="form-group">
-			<label for="">Dosya Gönder</label>
+			<label for="">Send</label>
 			<input id="fileInput" name="file[]" type="file" class="form-control" multiple/><br/>
-			<div id="sendBtn" class="btn btn-default form-control">Gönder</div><br/><br/>
-			<label for="">Dosya Numarası: </label> <span id="key" class="text-success"></span>
+			<div id="sendBtn" class="btn btn-default form-control">Send</div><br/><br/>
+			<label for="">Key: </label> <span id="key" class="text-success"></span>
 		</div>
 	</form>
 	<form id="receiveForm" class="col-sm-6">
 		<div class="form-group">
-			<label for="">Dosya Al</label>
+			<label for="">Receive</label>
 			<input id="keyInput" class="form-control" onkeypress="return event.keyCode != 13;"/><br/>
-			<div id="receiveBtn" class="btn btn-default form-control">Dosya Al</div><br/><br/>
-			<label for="">Durum: </label> <span id="status" class="text-success"></span>
+			<div id="receiveBtn" class="btn btn-default form-control">Receive</div><br/><br/>
+			<label for="">Status: </label> <span id="status" class="text-success"></span>
 		</div>
 	</form>
 
@@ -214,5 +141,28 @@ html {
 		    updateDevice();
 		})
 	</script>
-</body>
+
+						
+						</div>
+                    </form>
+                    
+					<div class="tm-social-icons-container text-xs-center">
+	                    <a href="#" class="tm-social-link"><i class="fa fa-facebook"></i></a>
+	                    <a href="#" class="tm-social-link"><i class="fa fa-google-plus"></i></a>
+	                    <a href="#" class="tm-social-link"><i class="fa fa-twitter"></i></a>
+	                    <a href="#" class="tm-social-link"><i class="fa fa-linkedin"></i></a>
+	                </div>
+
+					</div>
+				</div>	
+				<div class="footer-link">
+					<p>Copyright © 2020 Your Company 
+                    
+                    - Design: TemplateMo</p>
+				</div>
+			</div>	
+	</body>
+
+	<script type="text/javascript" src="js/particles.js"></script>
+	<script type="text/javascript" src="js/app.js"></script>
 </html>
