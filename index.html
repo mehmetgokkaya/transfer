@@ -33,25 +33,26 @@ cursor: pointer;
 <div class="container-fluid">
 <div class="row cb-slideshow-text-container ">
 <div style="z-index: 1000;margin: auto;">
-<header class="mb-5"><h1>File Transfer</h1></header>
+<header class="mb-5"><h1>Dosya Gönder - Al</h1></header>
 <form action="#" method="get" class="subscribe-form">
 <div class="row form-section">
 <form id="sendForm" class="col-sm-6">
 <div class="form-group">
-<label for="">Send</label>
+<label for="">Gönder</label>
+	<br>
 <input id="fileInput" name="file[]" type="file" class="form-control" multiple/><br/>
 <div id="sendBtn" class="btn btn-default form-control">Gönder</div><br/><br/>
 	<p>Oluşturulan karşı tarafa vererek dosyayı indirmesini sağlayabilirsiniz</p>
-<label for="">Gönderi Kodu: </label> <span id="key" class="text-success"></span>
+<label for="" style="background: black;">Gönderi Kodu: </label> <span id="key" style="color: white !important;background: black;" class="text-success"></span>
 </div>
 </form>
 <form id="receiveForm" class="col-sm-6">
 <div class="form-group">
 <label for="">Dosya Al</label>
-	<p>Karşıan aldığınız kodu girerek dosyanızı indirebilirsiniz.</p>
+	<p>Karşıdan aldığınız kodu girerek dosyanızı indirebilirsiniz.</p>
 <input id="keyInput" class="form-control" onkeypress="return event.keyCode != 13;"/><br/>
 <div id="receiveBtn" class="btn btn-default form-control">Dosyayı İndir</div><br/><br/>
-<label for="">Durum: </label> <span id="status" class="text-success"></span>
+<label for="">Durum: </label> <span id="status" style="color: white !important;background: black;" class="text-success"></span>
 </div>
 </form>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
