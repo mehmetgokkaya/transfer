@@ -40,16 +40,18 @@ cursor: pointer;
 <div class="form-group">
 <label for="">Send</label>
 <input id="fileInput" name="file[]" type="file" class="form-control" multiple/><br/>
-<div id="sendBtn" class="btn btn-default form-control">Send</div><br/><br/>
-<label for="">Receive Key: </label> <span id="key" class="text-success"></span>
+<div id="sendBtn" class="btn btn-default form-control">Gönder</div><br/><br/>
+	<p>Oluşturulan karşı tarafa vererek dosyayı indirmesini sağlayabilirsiniz</p>
+<label for="">Gönderi Kodu: </label> <span id="key" class="text-success"></span>
 </div>
 </form>
 <form id="receiveForm" class="col-sm-6">
 <div class="form-group">
-<label for="">Receive</label>
+<label for="">Dosya Al</label>
+	<p>Karşıan aldığınız kodu girerek dosyanızı indirebilirsiniz.</p>
 <input id="keyInput" class="form-control" onkeypress="return event.keyCode != 13;"/><br/>
-<div id="receiveBtn" class="btn btn-default form-control">Receive</div><br/><br/>
-<label for="">Status: </label> <span id="status" class="text-success"></span>
+<div id="receiveBtn" class="btn btn-default form-control">Dosyayı İndir</div><br/><br/>
+<label for="">Durum: </label> <span id="status" class="text-success"></span>
 </div>
 </form>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -147,7 +149,7 @@ cursor: pointer;
 </div>
 </div>	
 <div class="footer-link">
-<p>Copyright © 2020</p>
+<p>Copyright © 2022</p>
 </div>
 </div>	
 </form>
