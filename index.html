@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Unicorn Dosya Transfer</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400">  <!-- Google web font "Open Sans" -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400">  <!-- Google web font "Open Sans" -->
+<link rel="stylesheet" href="https://transfer.unicorncompany.com.tr/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://transfer.unicorncompany.com.tr/css/bootstrap.min.css">  
+<link rel="stylesheet" href="https://transfer.unicorncompany.com.tr/css/demo.css" />
+<link rel="stylesheet" href="https://transfer.unicorncompany.com.tr/css/templatemo-style.css">  
+<script type="text/javascript" src="https://transfer.unicorncompany.com.tr/js/modernizr.custom.86080.js"></script>
+  <script src = "https://cdnjs.cloudflare.com/ajax/libs/jquery.qrcode/1.0/jquery.qrcode.min.js"> </script>
+  <script src = "https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.1/qrcode.js"> </script> 
+  <script src = "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"> </script> 
+<style>
+.btn:focus, .btn:hover {
+text-decoration: none;
+color: black;
+background: white;
+cursor: pointer;
+}
+</style>
+</head>
+<body>
+<div id="particles-js"></div>
+<ul class="cb-slideshow">
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+</ul>
+<div class="container-fluid">
+<div class="row cb-slideshow-text-container ">
+<div style="z-index: 1000;margin: auto;">
+<header class="mb-5"><h1>Dosya Gönder - Al</h1></header>
+<form action="#" method="get" class="subscribe-form">
+<div class="row form-section">
+<form id="sendForm" class="col-sm-6">
+<div class="form-group">
+<label for="">Gönder</label>
+	<br>
+<input id="fileInput" name="file[]" type="file" class="form-control" multiple/><br/>
+<div id="sendBtn" class="btn btn-default form-control">Gönder</div><br/><br/>
+	<p>Oluşturulan Kodu karşı tarafa vererek dosyayı indirmesini sağlayabilirsiniz</p>
+<label for="" style="background: black;">Gönderi Kodu: </label><textarea style="width: 123px; height: 34px;" contenteditable="true" type ="text" id = "text" placeholder = "">http://transfer.unicorncompany.com.tr/</textarea>
+
+<a href = "javascript:void(0)" class = "btn btn-primary btn-lg my-4" onclick = "generate();"> Qr oluştur</a>  
+      <div id = "placeHolder"> </div>
+</div>
+</form>
+<form id="receiveForm" class="col-sm-6">
+<div class="form-group">
+<label for="">Dosya Al - - Karşıdan aldığınız kodu girerek dosyanızı indirebilirsiniz.</p></label>
+	
+<input id="keyInput" class="form-control" onkeypress="return event.keyCode != 13;"/><br/>
+<div id="receiveBtn" class="btn btn-default form-control">Dosyayı İndir</div><br/><br/>
+<label for="">Durum: </label> <span id="status" style="color: white !important;background: black;" class="text-success"></span>
+</div>
+</form>
+<textarea style="visibility: hidden; width: 123px; height: 34px;" contenteditable="true" type ="text" id = "site" placeholder = "">https://indir.unicorncompany.com.tr/indir.php?nu=</textarea>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+ <script>  
+    function generate(){  
+  var typeNumber = 10;  
+  var errorCorrectionLevel = 'L';  
+  var qr = qrcode(typeNumber, errorCorrectionLevel);  
+  var inputText = document.getElementById('text').value; 
+var textareaText = document.getElementById('site').value;  
+  qr.addData(textareaText);  
+  qr.addData(inputText);
+  qr.make();  
+  document.getElementById('placeHolder').innerHTML = qr.createImgTag();  
+  canvasScreen();  
+}  
+downloadQrCode =function (el){  
+  var canvas = document.getElementById("myCanvas");  
+  var image = canvas.toDataURL("image/png");  
+  el.href = image;  
+};  
+function canvasScreen() {  
+  var a = document.getElementsByTagName("img")[0];  
+  a.setAttribute("id","qrcode");    
+  var canvas = document.getElementById("myCanvas");  
+  var ctx = canvas.getContext("2d");  
+  var img = document.getElementById("qrcode");  
+  ctx.drawImage(img,70,0,250,250);  
+document.getElementById("dBtn").style.display = "block";  
+}  
+</script>  
+<script type="text/javascript">
+		$(document).ready(function () {
+			function updateDevice() {
+				$.ajax({
+					url: 'https://send-anywhere.com/web/v1/device',
+					type: 'GET',
+					dataType: 'jsonp',
+					data: {api_key: "4abe6380ca3f6f4c1a619623bad1875907f1f421", profile_name: "mehmetgokkaya"},
+					cache: false
+				}).done(function (data) {
+				});
+			}
+			function createKey(files) {
+				var params = { file: [] };
+				var formData = new FormData();
+				for (var i = 0; i < files.length; i++) {
+					var file = files[i];
+					params.file.push({ name: file.name, size: file.size });
+					formData.append("file" + i, file, file.name);
+				}
+				$.ajax({
+					url: 'https://send-anywhere.com/web/v1/key',
+					type: 'GET',
+					data: params,
+					dataType: 'jsonp',
+					cache: false
+				}).done(function (data, textStatus, xhr) {
+					$('#text').text(data.key);
+					sendFile(data.weblink, formData);
+				});
+			}
+			function sendFile(url, data) {
+				$.ajax({
+					url: url,
+					type: 'POST',
+					processData: false,
+					contentType: false,
+					data: data,
+					cache: false
+				}).done(function (data) {
+				});
+			}
+			function receiveKey(key) {
+				$('#status').text('waiting');
+				$.ajax({
+					url: 'https://send-anywhere.com/web/v1/key/' + key,
+					type: 'GET',
+					dataType: 'jsonp',
+					timeout: 3000,
+					cache: false
+				}).done(function (data) {
+					receiveFile(data.weblink);
+					$('#status').text('done');
+				}).fail(function (xhr, textStatus, error) {
+					$('#receiveForm .form-group').addClass('has-error');
+					$('#status').text('failed').removeClass('text-success').addClass('text-danger');
+				});
+			}
+			function receiveFile(url) {
+				$('<iframe />')
+					.attr('src', url)
+					.hide()
+					.appendTo('body');
+			}
+			$('#sendBtn').click(function (){
+				var files = $('#fileInput').prop('files')
+				if (files.length > 0) {
+					createKey(files);
+				}
+			});
+			$('#receiveBtn').click(function (){
+				receiveKey($('#keyInput').val());
+			});
+			$('#keyInput').keyup(function (e) {
+				if(e.keyCode == 13){
+					$('#receiveBtn').click();
+				}
+			});
+			$('#keyInput').keydown(function () {
+				$('#receiveForm .form-group').removeClass('has-error');
+				$('#status').text('').removeClass('text-danger').addClass('text-success');
+			});
+		    updateDevice();
+		})
+</script>
+<div class="tm-social-icons-container text-xs-center">
+<a href="#" class="tm-social-link"><i class="fa fa-facebook"></i></a>
+<a href="#" class="tm-social-link"><i class="fa fa-google-plus"></i></a>
+<a href="#" class="tm-social-link"><i class="fa fa-twitter"></i></a>
+<a href="#" class="tm-social-link"><i class="fa fa-linkedin"></i></a>
+</div>
+</div>
+</div>	
+<div class="footer-link">
+<p>Copyright © 2022</p>
+</div>
+</div>	
+</form>
+</div>
+</body>
+
+	<script type="text/javascript" src="https://transfer.unicorncompany.com.tr/js/particles.js"></script>
+	<script type="text/javascript" src="https://transfer.unicorncompany.com.tr/js/app.js"></script>
+</html>
