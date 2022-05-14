@@ -40,22 +40,20 @@ cursor: pointer;
 <header class="mb-5"><h1>Dosya Gönder - Al</h1></header>
 <form action="#" method="get" class="subscribe-form">
 <div class="row form-section">
-<form id="sendForm" class="col-sm-6">
+<form id="sendForm" class="col-sm-12">
 <div class="form-group">
-<label for="">Gönder</label>
-	<br>
 <input id="fileInput" name="file[]" type="file" class="form-control" multiple/><br/>
 <div id="sendBtn" class="btn btn-default form-control">Gönder</div><br/><br/>
-	<p>Oluşturulan Kodu karşı tarafa vererek dosyayı indirmesini sağlayabilirsiniz</p>
+	<h3 style="font-size: 17px;"><br>Göndere tıklatıktan sonra</br>Qr Kod Oluştura Tıklayınız</br> Qr Kodunu Okuttunuz taktirde indirme Sayfasına yönlendirecektir</h3>
 <label for="" style="background: black;">Gönderi Kodu: </label><textarea style="width: 123px; height: 34px;" contenteditable="true" type ="text" id = "text" placeholder = ""></textarea>
 
-<a href = "javascript:void(0)" class = "btn btn-primary btn-lg my-4" onclick = "generate();"> Qr oluştur</a>  
+<a href = "javascript:void(0)" class = "btn btn-primary btn-lg my-4" onclick = "generate();"> Qr Kod oluştur</a>  
       <div id = "placeHolder"> </div>
 </div>
 </form>
-<form id="receiveForm" class="col-sm-6">
-<div class="form-group">
-<label for="">Dosya Al - - Karşıdan aldığınız kodu girerek dosyanızı indirebilirsiniz.</p></label>
+<form id="receiveForm" class="col-sm-12">
+<div style="max-width: 50%;" class="form-group">
+<h3 style="font-size: 17px;">Dosya Al - - Karşıdan aldığınız kodu girerek dosyanızı indirebilirsiniz.</p></h3>
 	
 <input id="keyInput" class="form-control" onkeypress="return event.keyCode != 13;"/><br/>
 <div id="receiveBtn" class="btn btn-default form-control">Dosyayı İndir</div><br/><br/>
