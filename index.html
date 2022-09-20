@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Unicorn Dosya Transfer</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400">  <!-- Google web font "Open Sans" -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400">  <!-- Google web font "Open Sans" -->
+<link rel="stylesheet" href="https://transfer.unicorncompany.com.tr/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://transfer.unicorncompany.com.tr/css/bootstrap.min.css">  
+<link rel="stylesheet" href="https://transfer.unicorncompany.com.tr/css/demo.css" />
+<link rel="stylesheet" href="https://transfer.unicorncompany.com.tr/css/templatemo-style.css">  
+<script type="text/javascript" src="https://transfer.unicorncompany.com.tr/js/modernizr.custom.86080.js"></script>
+  <script src = "https://cdnjs.cloudflare.com/ajax/libs/jquery.qrcode/1.0/jquery.qrcode.min.js"> </script>
+  <script src = "https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.1/qrcode.js"> </script> 
+  <script src = "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"> </script> 
+<style>
+.btn:focus, .btn:hover {
+text-decoration: none;
+color: black;
+background: white;
+cursor: pointer;
+}
+</style>
+</head>
+<body>
+<div id="particles-js"></div>
+<ul class="cb-slideshow">
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+</ul>
+<div class="container-fluid">
+<div class="row cb-slideshow-text-container ">
+<div style="z-index: 1000;margin: auto;">
+<header class="mb-5"><h1>Dosya Gönder - Al</h1></header>
+<form action="#" method="get" class="subscribe-form">
+<div class="row form-section">
+<form id="sendForm" class="col-sm-12">
+<div class="form-group">
+<input id="fileInput" name="file[]" type="file" class="form-control" multiple/><br/>
+<div id="sendBtn" class="btn btn-default form-control">Gönder</div><br/><br/>
+	<h3 style="font-size: 17px;"><br>Göndere tıklatıktan sonra Qr Kodunu Okuttunuz taktirde indirme Sayfasına yönlendirecektir</h3>
+<label for="" style="background: black;"></label><textarea style=" visibility:hidden; width: 123px; height: 34px;" type ="text" id = "text" placeholder = ""></textarea>  
+<img id="qrcode" src="" />
+      <div id = "placeHolder"> </div>
+</div>
+</form>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> 
+<script type="text/javascript">
+$(document).ready(function(){
+  $('#sendBtn').click(function(e) {
+    $('img#qrcode').attr('src', 'https://chart.googleapis.com/chart?chs=177x177&cht=qr&chl=https://indir.unicorncompany.com.tr/indir.php?nu=' + $('textarea#text').val() + '&choe=UTF-8');
+  });
+});
+</script>
+<script type="text/javascript">
+$(document).ready(function(){
+  var timeout;
+  $('#sendBtn').click(function(e) {
+    if (timeout) {
+      window.clearTimeout(timeout);
+    }
+    timeout = window.setTimeout(function() {
+      $('img#qrcode').attr('src', 'https://chart.googleapis.com/chart?chs=177x177&cht=qr&chl=https://indir.unicorncompany.com.tr/indir.php?nu=' + $('textarea#text').val() + '&choe=UTF-8');
+    }, 1000);
+  });
+});
+</script>
+<script type="text/javascript">
+		$(document).ready(function () {
+			function updateDevice() {
+				$.ajax({
+					url: 'https://send-anywhere.com/web/v1/device',
+					type: 'GET',
+					dataType: 'jsonp',
+					data: {api_key: "4abe6380ca3f6f4c1a619623bad1875907f1f421", profile_name: "mehmetgokkaya"},
+					cache: false
+				}).done(function (data) {
+				});
+			}
+			function createKey(files) {
+				var params = { file: [] };
+				var formData = new FormData();
+				for (var i = 0; i < files.length; i++) {
+					var file = files[i];
+					params.file.push({ name: file.name, size: file.size });
+					formData.append("file" + i, file, file.name);
+				}
+				$.ajax({
+					url: 'https://send-anywhere.com/web/v1/key',
+					type: 'GET',
+					data: params,
+					dataType: 'jsonp',
+					cache: false
+				}).done(function (data, textStatus, xhr) {
+					$('#text').text(data.key);
+					sendFile(data.weblink, formData);
+				});
+			}
+			function sendFile(url, data) {
+				$.ajax({
+					url: url,
+					type: 'POST',
+					processData: false,
+					contentType: false,
+					data: data,
+					cache: false
+				}).done(function (data) {
+				});
+			}
+			function receiveKey(key) {
+				$('#status').text('waiting');
+				$.ajax({
+					url: 'https://send-anywhere.com/web/v1/key/' + key,
+					type: 'GET',
+					dataType: 'jsonp',
+					timeout: 3000,
+					cache: false
+				}).done(function (data) {
+					receiveFile(data.weblink);
+					$('#status').text('done');
+				}).fail(function (xhr, textStatus, error) {
+					$('#receiveForm .form-group').addClass('has-error');
+					$('#status').text('failed').removeClass('text-success').addClass('text-danger');
+				});
+			}
+			function receiveFile(url) {
+				$('<iframe />')
+					.attr('src', url)
+					.hide()
+					.appendTo('body');
+			}
+			$('#sendBtn').click(function (){
+				var files = $('#fileInput').prop('files')
+				if (files.length > 0) {
+					createKey(files);
+				}
+			});
+			$('#receiveBtn').click(function (){
+				receiveKey($('#keyInput').val());
+			});
+			$('#keyInput').keyup(function (e) {
+				if(e.keyCode == 13){
+					$('#receiveBtn').click();
+				}
+			});
+			$('#keyInput').keydown(function () {
+				$('#receiveForm .form-group').removeClass('has-error');
+				$('#status').text('').removeClass('text-danger').addClass('text-success');
+			});
+		    updateDevice();
+		})
+</script>
+<div class="tm-social-icons-container text-xs-center">
+<a href="#" class="tm-social-link"><i class="fa fa-facebook"></i></a>
+<a href="#" class="tm-social-link"><i class="fa fa-google-plus"></i></a>
+<a href="#" class="tm-social-link"><i class="fa fa-twitter"></i></a>
+<a href="#" class="tm-social-link"><i class="fa fa-linkedin"></i></a>
+</div>
+</div>
+</div>	
+<div class="footer-link">
+<p>Copyright © 2022</p>
+</div>
+</div>	
+</form>
+</div>
+</body>
+
+	<script type="text/javascript" src="https://transfer.unicorncompany.com.tr/js/particles.js"></script>
+	<script type="text/javascript" src="https://transfer.unicorncompany.com.tr/js/app.js"></script>
+</html>
