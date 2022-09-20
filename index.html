@@ -54,13 +54,6 @@ cursor: pointer;
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> 
 <script type="text/javascript">
 $(document).ready(function(){
-  $('#sendBtn').click(function(e) {
-    $('img#qrcode').attr('src', 'https://chart.googleapis.com/chart?chs=177x177&cht=qr&chl=https://indir.unicorncompany.com.tr/indir.php?nu=' + $('textarea#text').val() + '&choe=UTF-8');
-  });
-});
-</script>
-<script type="text/javascript">
-$(document).ready(function(){
   var timeout;
   $('#sendBtn').click(function(e) {
     if (timeout) {
